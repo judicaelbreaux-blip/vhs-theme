@@ -248,12 +248,14 @@
 .gp-meta-hdr {
   padding: 10px 0;
   font-weight: 700;
-  font-size: 11px;
+  /* VHS AESTHETIC: Made larger and more prominent */
+  font-size: 16px;
   text-transform: uppercase;
   letter-spacing: .2em;
-  color: var(--muted);
-  /* VHS AESTHETIC: Added glow */
-  text-shadow: 0 0 3px currentColor;
+  color: var(--ink);
+  /* VHS AESTHETIC: Brighter glow for headers */
+  text-shadow: 0 0 8px currentColor;
+  font-family: 'VT323', monospace;
 }
 
 .gp-support-title {
