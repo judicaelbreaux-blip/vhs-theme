@@ -1,0 +1,1409 @@
+/*
+=================================================================
+  GUMPYPUPPY V4 - VHS ANALOG HORROR THEME
+=================================================================
+*/
+
+/*
+////////////////////////////////////////////////////////////////////////////////
+// 1. FONT IMPORTS
+////////////////////////////////////////////////////////////////////////////////
+*/
+/* VHS AESTHETIC: Changed to monospace/system fonts for that retro tech feel */
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Special+Elite&display=swap');
+
+/*
+////////////////////////////////////////////////////////////////////////////////
+// 2. CORE THEME & LAYOUT
+////////////////////////////////////////////////////////////////////////////////
+*/
+.gp-sec {
+  /* VHS AESTHETIC: Desaturated, dark palette with greenish CRT tint */
+  --ink: #9fc99f;
+  --muted: #5a6a5a;
+  font-family: 'Courier New', 'Courier', monospace;
+  position: relative;
+  --gap: 20px;
+  --hero-over: clamp(80px, 10vw, 200px);
+  overflow: visible !important;
+  /* VHS AESTHETIC: Added scan line effect */
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.15),
+      rgba(0, 0, 0, 0.15) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+  animation: vhs-static 0.2s infinite;
+}
+
+/* VHS AESTHETIC: Added chromatic aberration and noise */
+@keyframes vhs-static {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 2px; }
+}
+
+:root { --pf-cut2: 0px; } /* VHS AESTHETIC: Removed cut corners for glitchy square look */
+
+.gp-sec * {
+  box-sizing: border-box;
+}
+
+.gp-wrap {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 8px;
+  overflow: visible !important;
+}
+
+.gp-header {
+  margin-bottom: 24px;
+}
+
+.gp-collection-subtitle {
+  display: inline-block;
+  /* VHS AESTHETIC: Changed to dark red "recording" indicator style */
+  background: #1a0000;
+  color: #ff3333;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .3em;
+  text-decoration: none;
+  margin-bottom: 16px;
+  /* VHS AESTHETIC: Removed clip-path for straight edges */
+  border: 1px solid #ff3333;
+  transition: background .2s, color .2s;
+  /* VHS AESTHETIC: Added text shadow for CRT glow */
+  text-shadow: 0 0 10px #ff3333;
+  animation: recording-blink 2s infinite;
+}
+
+/* VHS AESTHETIC: Blinking recording indicator */
+@keyframes recording-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0.6; }
+}
+
+.gp-collection-subtitle:hover {
+  background: #ff3333;
+  color: #000;
+  box-shadow: 0 0 20px #ff3333;
+}
+
+.gp-title {
+  /* VHS AESTHETIC: Changed to VT323 for that retro terminal look */
+  font-family: 'VT323', monospace;
+  font-size: clamp(48px, 8vw, 90px) !important;
+  line-height: 1 !important;
+  font-weight: 400 !important;
+  color: var(--ink, #9fc99f) !important;
+  margin: 0 0 12px !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase;
+  /* VHS AESTHETIC: CRT glow effect */
+  text-shadow: 
+    0 0 5px currentColor,
+    0 0 10px currentColor,
+    2px 2px 0 rgba(0,0,0,0.8);
+  animation: text-flicker 0.15s infinite;
+}
+
+/* VHS AESTHETIC: Subtle text flickering */
+@keyframes text-flicker {
+  0% { opacity: 0.98; }
+  50% { opacity: 1; }
+  100% { opacity: 0.97; }
+}
+
+.gp-tagline {
+  font-size: clamp(16px, 1.6vw, 16px) !important;
+  line-height: 1.7 !important;
+  font-weight: 400 !important;
+  color: var(--ink, #9fc99f) !important;
+  max-width: none !important;
+  width: auto !important;
+  /* VHS AESTHETIC: Subtle glow */
+  text-shadow: 0 0 3px currentColor;
+}
+
+.gp-intros {
+  /* VHS AESTHETIC: Dark, murky background with noise */
+  --panel: #0a0f0a;
+  background: var(--panel);
+  padding: clamp(16px, 2vw, 24px);
+  position: relative;
+  overflow: visible !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  /* VHS AESTHETIC: Added border for TV screen effect */
+  border: 2px solid #1a3a1a;
+  box-shadow: 
+    inset 0 0 50px rgba(0,0,0,0.5),
+    0 0 20px rgba(0,0,0,0.8);
+}
+
+.gp-section-title {
+  /* VHS AESTHETIC: Changed to Special Elite for typewriter horror feel */
+  font-family: 'Special Elite', monospace;
+  text-transform: uppercase;
+  font-style: normal;
+  letter-spacing: 0.15em;
+  font-size: clamp(18px, 1.8vw, 22px);
+  font-weight: 400;
+  margin: 0 0 clamp(10px, 1.5vw, 14px);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: .6em;
+  line-height: 1.2;
+  /* VHS AESTHETIC: CRT glow */
+  text-shadow: 0 0 5px currentColor;
+}
+
+.gp-intro-list {
+  margin: 0;
+  padding: 0 !important;
+  list-style: none;
+  counter-reset: scn;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.gp-intro-list li {
+  counter-increment: scn;
+  /* VHS AESTHETIC: Very dark with subtle green tint */
+  background: rgba(15, 25, 15, 0.8);
+  padding: 16px 16px 16px 64px;
+  border: 1px solid #1a3a1a;
+  /* VHS AESTHETIC: Removed clip-path */
+  border-radius: 0;
+  position: relative;
+  overflow: hidden;
+  transition: transform .2s, background .2s;
+  /* VHS AESTHETIC: Added scan line overlay */
+  box-shadow: inset 0 0 30px rgba(0,0,0,0.5);
+}
+
+.gp-intro-list li:hover {
+  transform: translateY(-2px);
+  background: rgba(20, 35, 20, 0.9);
+  box-shadow: 
+    inset 0 0 30px rgba(0,0,0,0.5),
+    0 0 15px rgba(159, 201, 159, 0.3);
+}
+
+.gp-intro-list li::before {
+  content: counter(scn, decimal-leading-zero);
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  /* VHS AESTHETIC: VT323 for numbers */
+  font-family: 'VT323', monospace;
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--accent);
+  z-index: 0;
+  /* VHS AESTHETIC: Changed to eerie glow */
+  animation: eerie-glow 3s ease-in-out infinite;
+  text-shadow: 0 0 10px currentColor;
+}
+
+/* VHS AESTHETIC: Eerie pulsing glow */
+@keyframes eerie-glow {
+  0%, 100% { 
+    text-shadow: 0 0 5px currentColor;
+    opacity: 0.7;
+  }
+  50% { 
+    text-shadow: 0 0 20px currentColor, 0 0 30px currentColor;
+    opacity: 1;
+  }
+}
+
+.gp-card {
+  padding: 0;
+  margin-bottom: 24px;
+}
+
+.gp-card p {
+  font-size: 13px;
+  line-height: 1.4;
+  margin: 0;
+  color: var(--ink);
+}
+
+.gp-note {
+  /* VHS AESTHETIC: Changed to Special Elite for handwritten horror notes */
+  font-family: 'Special Elite', monospace;
+  font-size: 1.1em !important;
+  letter-spacing: 0.05em;
+}
+
+.gp-meta-hdr {
+  padding: 10px 0;
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  color: var(--muted);
+  /* VHS AESTHETIC: Added glow */
+  text-shadow: 0 0 3px currentColor;
+}
+
+.gp-support-title {
+  /* VHS AESTHETIC: VT323 for digital horror aesthetic */
+  font-family: 'VT323', monospace;
+  color: #9fc99f;
+  text-transform: uppercase;
+  font-size: 26px;
+  font-weight: 400;
+  margin: 0 0 16px;
+  text-align: center !important;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 8px currentColor;
+}
+
+.gp-kbtn {
+  height: 48px;
+  display: inline-block;
+  padding: 20px 24px;
+  background: var(--accent);
+  color: #9fc99f;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 18px;
+  font-family: 'VT323', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.gp-support .gp-kbtn {
+  /* VHS AESTHETIC: Dark, ominous button style */
+  --ink: #0a0f0a;
+  --paper: #1a3a1a;
+  --cta: var(--accent, #ff3333);
+  position: relative;
+  display: inline-block !important;
+  vertical-align: middle;
+  padding: 1px 0 !important;
+  margin: 0 !important;
+  /* VHS AESTHETIC: No rounded corners */
+  border-radius: 0;
+  background: var(--ink) !important;
+  color: #9fc99f !important;
+  text-decoration: none;
+  line-height: 1;
+  isolation: isolate;
+  overflow: hidden;
+  transform: translate(0, 0);
+  outline: transparent solid 2px;
+  outline-offset: 5px;
+  /* VHS AESTHETIC: Changed to simple border with glow */
+  box-shadow: 
+    0 0 20px rgba(255, 51, 51, 0.5),
+    inset 0 0 20px rgba(0,0,0,0.8);
+  border: 2px solid var(--cta);
+  transition: transform .15s, box-shadow .15s;
+}
+
+.gp-support .gp-kbtn::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border-radius: 0;
+  background: var(--cta);
+  /* VHS AESTHETIC: Removed white border */
+  border: none;
+  z-index: 0;
+  /* VHS AESTHETIC: Added noise overlay */
+  opacity: 0.9;
+}
+
+.gp-support .gp-kbtn::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 0;
+  opacity: .15;
+  /* VHS AESTHETIC: Changed to noise pattern */
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.3) 2px,
+      rgba(0,0,0,0.3) 4px
+    );
+  background-size: 100% 4px;
+  animation: .6s linear infinite vhs-noise;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* VHS AESTHETIC: Noise animation */
+@keyframes vhs-noise {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 4px; }
+}
+
+.gp-support .gp-kbtn>span {
+  position: relative;
+  z-index: 1;
+  display: block;
+  padding: 1rem 1.25rem;
+  filter: drop-shadow(0 0 5px currentColor);
+}
+
+.gp-support .gp-kbtn:hover {
+  transform: translate(0, 0);
+  box-shadow: 
+    0 0 40px rgba(255, 51, 51, 0.8),
+    inset 0 0 20px rgba(0,0,0,0.8);
+}
+
+.gp-support .gp-kbtn:focus-visible {
+  outline-color: var(--cta);
+  outline-style: solid;
+}
+
+.gp-credit {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 12px;
+  text-align: center !important;
+  /* VHS AESTHETIC: Added subtle glow */
+  text-shadow: 0 0 3px currentColor;
+}
+
+.gpx-hero,
+.gp-top-content,
+.gp-bottom-content {
+  min-width: 0 !important;
+  position: relative !important;
+  overflow: visible !important;
+}
+
+.gpx-band {
+  --bleed: 500px;
+  z-index: 10;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start !important;
+  position: relative !important;
+  margin-top: calc(-1*var(--bleed)) !important;
+  padding-top: var(--bleed) !important;
+  overflow: visible !important;
+}
+
+.gpx-band::before {
+  content: "";
+  position: absolute;
+  left: calc(50% + 10px);
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: var(--hero) center bottom/cover no-repeat;
+  pointer-events: none;
+  z-index: 1;
+  /* VHS AESTHETIC: Added distortion filter */
+  filter: contrast(1.2) brightness(0.8) saturate(0.7);
+  /* VHS AESTHETIC: Added chromatic aberration effect */
+  animation: vhs-distortion 8s infinite;
+}
+
+/* VHS AESTHETIC: Subtle image distortion */
+@keyframes vhs-distortion {
+  0%, 100% { filter: contrast(1.2) brightness(0.8) saturate(0.7); }
+  25% { filter: contrast(1.3) brightness(0.75) saturate(0.6); }
+  50% { filter: contrast(1.15) brightness(0.85) saturate(0.8); }
+  75% { filter: contrast(1.25) brightness(0.8) saturate(0.65); }
+}
+
+.gp-top-content,
+.gp-bottom-content { grid-column: 1; }
+.gpx-hero { grid-column: 2; }
+
+.gpx-band .gp-intros { overflow: visible !important; }
+
+.gp-quote {
+  /* VHS AESTHETIC: Dark, ominous colors */
+  --panel: #0a0f0a;
+  --ink: #9fc99f;
+  --muted: #5a6a5a;
+  display: block;
+  margin: 24px 0px;
+  padding: 14px 16px 14px 48px;
+  /* VHS AESTHETIC: Changed gradient to darker */
+  background: linear-gradient(90deg, rgba(26, 58, 26, 0.3), rgba(0, 0, 0, 0));
+  color: var(--ink);
+  font-style: normal;
+  border-left: 3px solid var(--accent);
+  position: relative;
+  /* VHS AESTHETIC: Removed clip-path */
+  border-radius: 0;
+  /* VHS AESTHETIC: Added inner shadow */
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+}
+
+.gp-quote::before {
+  content: """;
+  position: absolute;
+  left: 12px;
+  top: 6px;
+  /* VHS AESTHETIC: Changed to monospace */
+  font: 400 40px/1 'Courier New', monospace;
+  color: rgba(159, 201, 159, 0.15);
+  -webkit-text-stroke: 1px rgba(159, 201, 159, 0.1);
+  text-shadow: 0 0 10px currentColor;
+}
+
+.gp-quote .q { display: block; }
+
+.gp-quote .by {
+  display: block;
+  margin-top: 6px;
+  font: normal 600 11px/1.2 'Courier New', monospace;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.gp-collection-subtitle,
+.gp-header,
+.gp-quote,
+.gp-card,
+.gp-intros,
+.gp-presets,
+.gp-support {
+  /* VHS AESTHETIC: Changed to glitchy fade-in */
+  animation: vhs-fadeIn 1.2s cubic-bezier(.25, 1, .5, 1) both;
+}
+
+/* VHS AESTHETIC: Glitchy appearance animation */
+@keyframes vhs-fadeIn {
+  0% { 
+    opacity: 0; 
+    transform: translateY(30px);
+    filter: blur(5px);
+  }
+  50% {
+    opacity: 0.5;
+    filter: blur(2px);
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.gp-collection-subtitle { animation-delay: .2s; }
+.gp-header { animation-delay: .3s; }
+.gp-quote { animation-delay: .4s; }
+.gp-card { animation-delay: .5s; }
+.gp-intros { animation-delay: .6s; }
+.gp-presets { animation-delay: .7s; }
+.gp-support { animation-delay: .8s; }
+
+.gpx-num {
+  position: absolute;
+  top: 90vh;
+  right: -.04em;
+  /* VHS AESTHETIC: VT323 for numbers */
+  font-family: 'VT323', monospace;
+  font-weight: 400;
+  font-size: clamp(120px, 18vw, 520px);
+  line-height: .8;
+  letter-spacing: -.02em;
+  color: rgba(159, 201, 159, 0.08);
+  /* VHS AESTHETIC: Added glow */
+  text-shadow: 0 0 20px rgba(159, 201, 159, 0.3);
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  mix-blend-mode: normal;
+  /* VHS AESTHETIC: Added flicker */
+  animation: number-flicker 0.3s infinite;
+}
+
+/* VHS AESTHETIC: Number flickering */
+@keyframes number-flicker {
+  0%, 100% { opacity: 0.08; }
+  50% { opacity: 0.12; }
+}
+
+.gumpypuppy-credit {
+  position: fixed;
+  left: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 2147483647;
+  font-family: 'VT323', monospace;
+  font-size: 1rem;
+  color: rgba(159, 201, 159, .6);
+  text-decoration: none;
+  cursor: pointer;
+  overflow: visible !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em;
+}
+
+button.ant-btn:hover { 
+  box-shadow: none !important;
+  /* VHS AESTHETIC: Added glow on hover */
+  text-shadow: 0 0 8px currentColor;
+}
+button.ant-btn:active { transform: translateY(1px); }
+
+button.ant-btn.ant-btn-default {
+  /* VHS AESTHETIC: Dark with green CRT glow */
+  background: #0a0f0a !important;
+  color: #9fc99f !important;
+  border: 2px solid #1a3a1a !important;
+  box-shadow: 0 0 15px rgba(26, 58, 26, 0.5);
+  text-shadow: 0 0 5px currentColor;
+}
+
+button.ant-btn.ant-btn-primary {
+  /* VHS AESTHETIC: Red "recording" style */
+  background: var(--accent) !important;
+  color: #0a0f0a !important;
+  border: 2px solid #000 !important;
+  box-shadow: 0 0 20px rgba(255, 51, 51, 0.6) !important;
+}
+
+button.ant-btn .ml-1,
+div.flex.flex-wrap.justify-end [class*=ml-] {}
+
+button.ant-btn:has(svg.lucide-messages-square)::after,
+button.ant-btn.ant-btn-default:has(.anticon-star)::after {
+  content: "";
+  position: absolute;
+  inset: -2px !important;
+  border-radius: inherit;
+  background: 0 0;
+  box-shadow: 0 0 0 0 var(--sonar-color);
+  animation: 2.8s ease-out infinite btn-sonar !important;
+  pointer-events: none;
+  z-index: 1;
+}
+
+button.ant-btn.ant-btn-default:has(.anticon-star)::after { --sonar-color: var(--accent); }
+button.ant-btn:has(svg.lucide-messages-square)::after { --sonar-color: var(--accent); }
+
+button.ant-btn:has(svg.lucide-messages-square) {
+  font-size: 20px !important;
+  font-weight: 400 !important;
+  height: 64px !important;
+  padding: 0 1.8em 0 1.8em;
+  /* VHS AESTHETIC: No rounded corners */
+  border-radius: 0 !important;
+  /* VHS AESTHETIC: Red warning/recording style */
+  background: var(--accent) !important;
+  color: #0a0f0a !important;
+  border: 3px solid #000 !important;
+  outline: none;
+  /* VHS AESTHETIC: Changed to glow effect */
+  box-shadow: 
+    0 0 30px rgba(255, 51, 51, 0.8),
+    inset 0 0 20px rgba(0,0,0,0.5);
+  z-index: 10;
+  transition: background .25s, color .25s, box-shadow .25s, transform .15s;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+button.ant-btn:has(svg.lucide-messages-square):hover {
+  background: #1a3a1a !important;
+  color: #9fc99f !important;
+  box-shadow: 0 0 40px rgba(159, 201, 159, 0.6) !important;
+  border-color: #9fc99f !important;
+}
+
+button.ant-btn:has(svg.lucide-messages-square):active { transform: scale(.97); }
+
+div.flex.flex-wrap.justify-end {
+  position: relative;
+  padding-bottom: 120px;
+  align-items: center;
+  gap: 8px;
+}
+
+.ant-space.ant-space-horizontal.ant-space-align-center .ant-space-item:first-child>.ant-tag.ant-tag-error {
+  position: relative;
+  display: inline-block !important;
+  width: 28px !important;
+  height: 28px !important;
+  padding: 0 !important;
+  background: 0 0 !important;
+  border: 0 !important;
+  color: transparent !important;
+  line-height: 0 !important;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.ant-space.ant-space-horizontal.ant-space-align-center .ant-space-item:first-child>.ant-tag.ant-tag-error::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url(https://files.catbox.moe/e1xatc.svg) center/contain no-repeat;
+  /* VHS AESTHETIC: Added filter to icon */
+  filter: hue-rotate(90deg) saturate(0.5);
+}
+
+:is(h1, h2, h3).ant-typography[class*=css-] {
+  font-size: clamp(30px, 4vw, 38px) !important;
+  line-height: 1.15 !important;
+  font-weight: 700 !important;
+  color: var(--ink, #9fc99f) !important;
+  margin: 0 0 6px !important;
+  letter-spacing: 0 !important;
+  max-width: 50%;
+}
+
+.msg-mkdn-container.font-size-message {
+  font-size: clamp(16px, 1.6vw, 16px) !important;
+  line-height: 1.7 !important;
+  font-weight: 400 !important;
+  color: var(--ink, #9fc99f) !important;
+  max-width: none !important;
+  width: auto !important;
+}
+
+.msg-mkdn-container.font-size-message>:is(h1, h2, h3, p, blockquote, ul, ol):has(~.gp-sec) { max-width: 50% !important; }
+.msg-mkdn-container.font-size-message>:where(h1, h2, h3, p, blockquote, ul, ol, pre) { max-width: 50% !important; margin-right: auto; }
+.msg-mkdn-container.font-size-message p>strong { font-weight: 400 !important; }
+
+.gp-sec, .gp-wrap, .gpx-band { overflow: visible !important; }
+.gpx-band { contain: unset !important; z-index: 2; }
+.gpx-left { position: relative; z-index: 3; }
+.gpx-hero { position: relative; z-index: 2; }
+
+.gpx-band::before {
+  content: "";
+  position: fixed;
+  left: 52%;
+  right: 0;
+  bottom: 0;
+  top: auto;
+  width: 48vw;
+  height: 100vh;
+  background: var(--hero) center bottom/contain no-repeat !important;
+  pointer-events: none;
+  z-index: 1;
+  transition: transform .8s ease;
+  transform: translateY(60vh) rotate(-1deg);
+  animation: 2.2s cubic-bezier(.25, 1, .5, 1) both puppetGlide;
+  /* VHS AESTHETIC: Added distortion */
+  filter: contrast(1.2) brightness(0.8) saturate(0.7);
+}
+
+@media(prefers-reduced-motion:reduce) {
+  .gpx-band::before {
+    animation: none;
+    transform: none;
+  }
+}
+
+@media(min-width:769px) and (max-width:991px) {
+  .gpx-band::before {
+    position: absolute;
+    left: auto;
+    right: -6vw;
+    top: auto;
+    bottom: -4vh;
+    width: min(680px, 60vw);
+    height: min(90vh, 820px);
+  }
+  .gpx-band { padding-right: clamp(24px, 12vw, 180px); }
+  .gp-top-content {
+    grid-column: 1 / -1;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    padding: 0 calc(50vw - 50% + 8px);
+    box-sizing: border-box;
+    background: transparent;
+  }
+}
+
+@media(max-width:768px) {
+  .gpx-band::before { content: none !important; }
+  .gp-bottom-content { grid-row: 3; }
+  .gp-intros { margin-bottom: 24px; padding: 16px !important; border-radius: 0 !important; }
+}
+
+.gpx-left { display: flex; flex-direction: column; }
+.gp-support {
+  /* VHS AESTHETIC: Dark panel */
+  --panel: #0a0f0a;
+  background: var(--panel);
+  margin-top: 24px !important;
+  padding: clamp(16px, 2vw, 24px);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: 100%;
+  /* VHS AESTHETIC: Added border */
+  border: 2px solid #1a3a1a;
+  box-shadow: 
+    inset 0 0 50px rgba(0,0,0,0.5),
+    0 0 20px rgba(0,0,0,0.8);
+}
+.gpx-band .gp-intros, .gp-support { max-width: 100%; }
+
+@media(max-width:768px) {
+  .gp-support {
+    border-radius: 0;
+    padding: 16px;
+  }
+  .gp-support .gp-kbtn {
+    width: 100% !important;
+    text-align: center !important;
+    display: block !important;
+  }
+}
+
+.ant-col.text-left [class*=ant-image] {
+  position: relative;
+  overflow: hidden;
+  /* VHS AESTHETIC: No rounded corners */
+  border-radius: 0;
+  /* VHS AESTHETIC: Added border */
+  border: 2px solid #1a3a1a;
+}
+
+.ant-col.text-left [class*=ant-image] .ant-image-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0;
+  transition: .3s;
+  /* VHS AESTHETIC: Added filter */
+  filter: contrast(1.2) brightness(0.8) saturate(0.7);
+}
+
+.ant-col.text-left [class*=ant-image] .ant-image-mask,
+.ant-col.text-left [class*=ant-image] .ant-image-mask-info {
+  display: none !important;
+}
+
+.gp-support,
+.gpx-band .gp-intros {
+  border-radius: 0 !important;
+  /* VHS AESTHETIC: Removed clip-path */
+  clip-path: none;
+  overflow: hidden !important;
+}
+
+.gp-presets {
+  /* VHS AESTHETIC: Dark panel */
+  --panel: #0a0f0a;
+  background: var(--panel);
+  border-radius: 0 !important;
+  /* VHS AESTHETIC: Removed clip-path */
+  clip-path: none;
+  padding: clamp(12px, 1.5vw, 20px);
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  max-width: 100%;
+  /* VHS AESTHETIC: Added border */
+  border: 2px solid #1a3a1a;
+  box-shadow: 
+    inset 0 0 50px rgba(0,0,0,0.5),
+    0 0 20px rgba(0,0,0,0.8);
+}
+
+.gp-presets-label {
+  /* VHS AESTHETIC: VT323 font */
+  font-family: 'VT323', monospace;
+  font-size: 24px;
+  font-weight: 400;
+  color: #9fc99f;
+  white-space: nowrap;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 5px currentColor;
+  text-transform: uppercase;
+}
+
+@media(max-width:768px) { .gpx-band { padding-right: 0 !important; } }
+@media(min-width:769px) { .gpx-band { padding-right: clamp(16px, 8vw, 140px); } }
+
+.gp-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.gp-badge {
+  /* VHS AESTHETIC: Dark colors */
+  --ink: #0a0f0a;
+  --paper: #1a3a1a;
+  --cta: #3a5a3a;
+  position: relative;
+  display: inline-block;
+  padding: .6em 1.1em;
+  /* VHS AESTHETIC: No rounded corners */
+  border-radius: 0;
+  font: 700 11px/1 'Courier New', monospace;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #9fc99f;
+  text-decoration: none;
+  background: var(--cta);
+  border: 1px solid #1a3a1a;
+  /* VHS AESTHETIC: Changed to glow */
+  box-shadow: 0 0 10px rgba(26, 58, 26, 0.5);
+  text-shadow: 0 0 3px currentColor;
+  transition: transform .15s, box-shadow .15s, background .25s, color .25s, border-color .25s;
+}
+
+.gp-badge:hover {
+  transform: none;
+  color: #ff3333;
+  text-shadow: 0 0 8px currentColor;
+  box-shadow: 0 0 20px rgba(255, 51, 51, 0.5);
+  border-color: var(--ink);
+}
+
+.gp-badge:active { transform: translateY(1px); }
+/* VHS AESTHETIC: Changed badge colors to muted, desaturated tones */
+.gp-badge-soji { --cta: #2a2a3a; }
+.gp-badge-deepseek { --cta: #1a2a3a; }
+.gp-badge-claude { --cta: #3a2a1a; }
+.gp-badge-grok { --cta: #1a1a1a; }
+
+.ant-col.text-left.ant-col-xs-24.ant-col-lg-24 {
+  position: relative !important;
+  z-index: 90 !important;
+  border: none !important;
+}
+
+.ant-collapse {
+  border: none !important;
+  /* VHS AESTHETIC: Dark gradient */
+  background: linear-gradient(90deg, rgba(26, 58, 26, 0.2) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+.ant-collapse-item { border-bottom: none !important; }
+
+div.flex.flex-wrap.justify-end {
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+}
+
+@media(max-width:768px) {
+  .msg-mkdn-container.font-size-message p {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    inline-size: 100% !important;
+    max-inline-size: 100% !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+  }
+}
+
+.ant-collapse-content.ant-collapse-content-active {
+  /* VHS AESTHETIC: Very dark background */
+  background: linear-gradient(to right, rgba(10, 15, 10, 0.95), rgba(10, 15, 10, 0.8));
+  border: 1px solid #1a3a1a !important;
+  backdrop-filter: blur(6px) saturate(80%);
+  -webkit-backdrop-filter: blur(6px) saturate(80%);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
+}
+
+header.ant-layout-header {
+  z-index: 99999 !important;
+}
+
+/* --- General Dropdown Item Styles --- */
+
+.ant-dropdown-menu-item {
+  justify-content: flex-start !important;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+}
+
+.ant-dropdown-menu-item .ant-dropdown-menu-title-content {
+  text-align: left !important;
+}
+
+
+/* --- Hover Effects --- */
+
+li.ant-dropdown-menu-item:not(:has(.ant-upload-wrapper)):hover {
+  /* VHS AESTHETIC: Dark hover */
+  background-color: #1a3a1a !important;
+  color: #9fc99f !important;
+}
+
+
+/* --- Special Styles for the "Upload" Button Item --- */
+
+li.ant-dropdown-menu-item:has(.ant-upload-wrapper):hover {
+  background-color: transparent !important;
+}
+
+li.ant-dropdown-menu-item:has(.ant-upload-wrapper) .ant-btn {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  width: 100%;
+  padding: 0 !important;
+  justify-content: flex-start !important;
+  font-weight: 400 !important;
+}
+
+li.ant-dropdown-menu-item:has(.ant-upload-wrapper) .ant-btn:hover,
+li.ant-dropdown-menu-item:has(.ant-upload-wrapper) .ant-btn:focus {
+  background-color: #1a3a1a !important;
+  color: #9fc99f !important;
+  outline: none !important;
+}
+
+button.sc-ifyrAs {
+    display: inline-block !important;
+    font-size: 20px !important;
+    font-weight: 400 !important;
+    height: 40px !important;
+    padding: 0 2em !important;
+    border-radius: 0 !important;
+    /* VHS AESTHETIC: Dark button */
+    background: #0a0f0a !important;
+    color: #9fc99f !important;
+    border: 2px solid #1a3a1a !important;
+    box-shadow: 0 0 15px rgba(26, 58, 26, 0.5);
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s, background-color 0.25s, color 0.25s, border-color 0.25s;
+    /* VHS AESTHETIC: VT323 font */
+    font-family: 'VT323', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-shadow: 0 0 5px currentColor;
+  }
+
+  button.sc-ifyrAs:hover {
+    background: #1a3a1a !important;
+    color: #ff3333 !important;
+    box-shadow: 0 0 25px rgba(255, 51, 51, 0.5) !important;
+  }
+
+  button.sc-ifyrAs {
+    position: relative !important;
+    overflow: visible !important;
+  }
+
+  button.sc-ifyrAs::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: transparent;
+    --sonar-color: var(--accent);
+    box-shadow: 0 0 0 0 var(--sonar-color);
+    animation: 2.8s ease-out infinite btn-sonar !important;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  div.sc-blmEgr {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .ant-tooltip {
+    display: none !important;
+  }
+
+  @media (min-width: 992px) {
+    div.sc-blmEgr {
+      padding-right: 55%;
+    }
+  }
+
+.comment-width .ant-comment-inner{
+  padding:16px;
+  margin-bottom:16px;
+}
+.ant-comment .ant-comment-nested{
+  margin-right:16px;
+}
+
+.pov-badge {
+  display: inline-block;
+  /* VHS AESTHETIC: Dark background */
+  background: #0f150f;
+  color: #9fc99f;
+  padding: 3px 8px;
+  margin-right: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  vertical-align: middle;
+  /* VHS AESTHETIC: Removed clip-path */
+  border: 1px solid #1a3a1a;
+  text-shadow: 0 0 3px currentColor;
+}
+
+.dOesoR,.hFiwlk,.cSOzTo,.bPlxTo,.isKXvo,.dAxClk,.fRJWto,.gYqOac{min-height:100%;max-height:24rem}.dOesoR::after,.hFiwlk::after,.cSOzTo::after,.bPlxTo::after,.isKXvo::after,.dAxClk::after,.fRJWto::after,.gYqOac::after{display:none}
+
+/* VHS AESTHETIC: Changed shake animation to more erratic glitch */
+@keyframes vhs-glitch {
+  0%, 80% {
+    transform: translateX(-12px) scale(1.15) rotate(0deg);
+  }
+  84% {
+    transform: translateX(-10px) scale(1.15) rotate(-2deg);
+    filter: hue-rotate(10deg);
+  }
+  88% {
+    transform: translateX(-14px) scale(1.15) rotate(2deg);
+    filter: hue-rotate(-10deg);
+  }
+  92% {
+    transform: translateX(-12px) scale(1.15) rotate(-1deg);
+    filter: hue-rotate(5deg);
+  }
+  96% {
+    transform: translateX(-11px) scale(1.15) rotate(1deg);
+    filter: hue-rotate(-5deg);
+  }
+  100% {
+    transform: translateX(-12px) scale(1.15) rotate(0deg);
+    filter: hue-rotate(0deg);
+  }
+}
+
+@keyframes star-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 5px rgb(from var(--accent) r g b / 0.7));
+  }
+  50% {
+    filter: drop-shadow(0 0 16px var(--accent));
+  }
+}
+
+button.ant-btn:has(.anticon-star svg path[d*="zM"]) {
+  transform: translateX(-12px) scale(1.15);
+  /* VHS AESTHETIC: Changed to glitch animation */
+  animation: vhs-glitch 5s ease-in-out infinite;
+}
+
+button.ant-btn:has(.anticon-star svg path[d*="zM"]) .anticon-star svg {
+  animation: star-glow 2.5s ease-in-out infinite;
+  overflow: visible;
+}
+
+button.ant-btn:has(.anticon-star svg path[d*="zM"]) .anticon-star svg path {
+  fill: var(--accent);
+  stroke: none;
+}
+
+button.ant-btn:has(.anticon-star):not(:has(svg path[d*="zM"])) {
+  animation: none !important;
+  transform: none !important;
+}
+
+button.ant-btn:has(.anticon-star):not(:has(svg path[d*="zM"])) .anticon-star svg {
+  animation: none !important;
+  filter: none !important;
+  overflow: hidden;
+}
+
+button.ant-btn:has(.anticon-star):not(:has(svg path[d*="zM"])) .anticon-star svg path {
+  fill: currentColor !important;
+  stroke: none;
+}
+
+button.ant-btn:has(.anticon-star):not(:has(svg path[d*="zM"]))::after {
+  animation: none !important;
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+	.gumpypuppy-credit {
+		display:none;
+	}
+  button.ant-btn.ant-btn-icon-only:has(.anticon-star svg path[d*="zM"]) {
+    position: fixed !important;
+    bottom: 16px !important;
+    left: 16px !important;
+    right: 16px !important;
+    width: auto !important;
+    transform: none !important;
+    animation: none !important;
+  }
+  
+  button.ant-btn.ant-btn-icon-only:has(.anticon-star svg path[d*="zM"])::after {
+      animation: btn-sonar 2.8s ease-out infinite !important;
+  }
+}/* VHS AESTHETIC: Added glow */
+  text-shadow: 0 0 5px currentColor;
+  letter-spacing: 0.05em;
+}
+
+/*
+////////////////////////////////////////////////////////////////////////////////
+// 3. KEYFRAMES & ANIMATIONS
+////////////////////////////////////////////////////////////////////////////////
+*/
+/* Kept original animation names but updated for VHS aesthetic */
+
+@keyframes kofiDots {
+  0% { background-position: 0 0, 4px 4px; }
+  100% { background-position: 8px 0, 12px 4px; }
+}
+
+@keyframes btn-sonar {
+  0% { 
+    box-shadow: 0 0 0 0 var(--sonar-color);
+  }
+  70% { 
+    box-shadow: 0 0 0 12px rgba(159, 201, 159, 0);
+  }
+  100% { 
+    box-shadow: 0 0 0 0 rgba(159, 201, 159, 0);
+  }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes puppetGlide {
+  0% { 
+    transform: translateY(60vh) rotate(-1deg); 
+    opacity: 0;
+    filter: blur(10px);
+  }
+  100% { 
+    transform: translateY(0) rotate(0); 
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes accentGlow {
+  0%, 100% { text-shadow: 0 0 5px rgb(from var(--accent) r g b / .2); }
+  50% { text-shadow: 0 0 20px rgb(from var(--accent) r g b / .7); }
+}
+
+/*
+////////////////////////////////////////////////////////////////////////////////
+// 4. RESPONSIVE & MEDIA QUERIES
+////////////////////////////////////////////////////////////////////////////////
+*/
+@media(min-width:769px) {
+  .gpx-band {
+    transform: none !important;
+    margin-left: 0 !important;
+  }
+  .gpx-band .gp-intros {
+    padding: clamp(14px, 1.6vw, 18px) !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+  .gpx-band .gp-section-title {
+    margin: 0 0 10px !important;
+  }
+  .gpx-band .gp-intro-list {
+    padding-left: 0 !important;
+  }
+}
+
+@media(max-width:768px) {
+  .gpx-band {
+    grid-template-columns: 1fr !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    overflow: visible !important;
+  }
+  .gp-top-content { grid-row: 1; }
+  .gpx-hero { grid-column: 1; grid-row: 2; }
+  .gp-bottom-content { grid-row: 3; }
+  .gpx-hero {
+    background: var(--hero) top center/cover no-repeat !important;
+    min-height: clamp(260px, 50vh, 560px) !important;
+    /* VHS AESTHETIC: Added filter */
+    filter: contrast(1.2) brightness(0.8) saturate(0.7);
+  }
+  .gp-intros { max-width: 100% !important; }
+  .gpx-band .gp-intros {
+    margin: 0 !important;
+    padding: 16px !important;
+    max-width: 100% !important;
+    border-radius: 0 !important;
+  }
+  :is(h1, h2, h3, h4, h5, h6).ant-typography,
+  .ant-typography[class*="css-"],
+  .msg-mkdn-container.font-size-message,
+  .msg-mkdn-container.font-size-message>*,
+  .sc-beySPh.eewLKS.msg-mkdn-container.font-size-message,
+  .sc-beySPh.eewLKS.msg-mkdn-container.font-size-message>* {
+    max-width: none !important;
+    width: 100% !important;
+  }
+  .gpx-num {
+    font-size: clamp(80px, 40vw, 320px);
+    top: 2vh;
+    right: -.2em;
+    opacity: .15;
+  }
+}
+
+@media(max-width:480px) {
+  .gp-intros { max-width: 100% !important; }
+  .gpx-hero {
+    min-height: clamp(240px, 52vh, 520px) !important;
+    background-position: top center !important;
+  }
+}
+
+@media(hover:hover) {
+  .gp-badge:hover {
+    transform: translateY(-1px);
+    /* VHS AESTHETIC: Changed shadow to glow */
+    box-shadow: 0 0 20px rgba(159, 201, 159, 0.5);
+  }
+  .gp-kbtn:hover {
+    transform: translateY(-2px);
+  }
+  .ant-col.text-left [class*=ant-image]:hover .ant-image-img {
+    transform: scale(1.12);
+    /* VHS AESTHETIC: Changed filter */
+    filter: contrast(1.3) saturate(0.6) brightness(0.8);
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/*
+////////////////////////////////////////////////////////////////////////////////
+// 5. CHUB.AI OVERRIDES [USE CAUTION]
+////////////////////////////////////////////////////////////////////////////////
+*/
+h3.ant-typography,
+h5.ant-typography,
+div.msg-mkdn-container:not(:has(.gp-sec)),
+h4.ant-typography.mt-8,
+h4.ant-typography.mt-8+div {
+  display: none !important;
+}
+
+.ant-layout-footer {
+  display: none !important;
+}
+
+.ant-space.ant-space-horizontal.ant-space-align-center .ant-tag {
+  /* VHS AESTHETIC: Dark tags with green tint */
+  background: rgba(26, 58, 26, 0.8) !important;
+  color: #9fc99f !important;
+  border: 1px solid #1a3a1a !important;
+  border-radius: 0 !important;
+  padding: .15em .55em !important;
+  font-size: .7rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  opacity: 1 !important;
+  transition: background .2s, color .2s;
+  /* VHS AESTHETIC: Removed clip-path */
+  clip-path: none !important;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 3px currentColor;
+}
+
+.ant-space.ant-space-horizontal.ant-space-align-center .ant-tag:hover {
+  background: #1a3a1a !important;
+  color: #ff3333 !important;
+  box-shadow: 0 0 15px rgba(255, 51, 51, 0.5);
+}
+
+.ant-space.ant-space-horizontal.ant-space-align-center {
+  max-height: none !important;
+  overflow: visible !important;
+  flex-wrap: wrap !important;
+}
+
+.ant-tag {
+  /* VHS AESTHETIC: Dark tags with green tint */
+  background: rgba(26, 58, 26, 0.8) !important;
+  color: #9fc99f !important;
+  border: 1px solid #1a3a1a !important;
+  border-radius: 0 !important;
+  padding: .10em .50em !important;
+  font-size: .6rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  transition: background .2s, color .2s !important;
+  /* VHS AESTHETIC: Removed clip-path */
+  clip-path: none !important;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 3px currentColor;
+}
+
+.ant-tag:hover {
+  background: #1a3a1a !important;
+  color: #ff3333 !important;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(255, 51, 51, 0.5);
+}
+
+.ant-ribbon.ant-ribbon-placement-end,
+.no-vertical-anything *,
+div#chara-list {
+  display: none !important;
+}
+
+.ant-layout-header,
+.ant-menu-overflow-item.ant-menu-item.ant-menu-item-only-child.no-padding.ml-0.pl-0.mr-2,
+.ant-menu-overflow.ant-menu.ant-menu-root.ant-menu-horizontal.ant-menu-dark{
+  background-color: rgb(0, 0, 0, 0) !important;
+}
+
+button.ant-btn:has(.anticon-star svg path[d*="M664.8 561.6"]) {
+  position: fixed !important;
+  right: 24px !important;
+  bottom: 24px !important;
+  z-index: 2147483647 !important;
+}
+
+button.ant-btn {
+  position: relative;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: .5em;
+  white-space: nowrap;
+  /* VHS AESTHETIC: VT323 for buttons */
+  font-family: 'VT323', monospace;
+  font-weight: 400 !important;
+  font-size: 20px !important;
+  height: 48px !important;
+  min-width: 64px !important;
+  padding: .5em 1.4em !important;
+  /* VHS AESTHETIC: No rounded corners */
+  border-radius: 0 !important;
+  transition: transform .15s, box-shadow .15s, background-color .25s, color .25s, border-color .25s;
+  cursor: pointer;
